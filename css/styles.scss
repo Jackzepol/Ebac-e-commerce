@@ -1,0 +1,250 @@
+/*Variables*/
+$bgHeader: #2a2929;
+$generalText: #000000;
+$whiteText: #fff;
+$bgLight: #efefef;
+$generalBorder: #333;
+$bgButton: rgba(0, 0, 0, 0.90);
+$cartShadow: -19px -1px 22px -5px rgba(0, 0, 0, 0.30);
+$bgDisabled: #9b9b9b;
+$generalFont: "Lexend", Arial, Helvetica, sans-serif;
+$marginBase: 10px 10px;
+$marginBox: border-box;
+$generalWeight: 600;
+
+/*Mixin para el contenedor de la cabecera*/
+@mixin flexContainer($direction, $justify, $align, $gapF) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gapF;
+}
+
+/*Mixin para el contenedor del cuerpo*/
+@mixin gridContainer($mode, $minW, $maxW, $gapG, $alignI) {
+    display: grid;
+    grid-template-columns: repeat($mode, minmax($minW, $maxW));
+    gap: $gapG;
+    align-items: $alignI;
+}
+
+/*mixin para los iconos de la cabecera y el carrito*/
+@mixin icons($height, $width, $radius) {
+    height: $height;
+    width: $width;
+    border-radius: $radius;
+}
+
+/*Mixin para el tamaño de las fuentes*/
+@mixin fontSizeFluid($min, $preferred, $max) {
+    font-size: Clamp($min, $preferred, $max);
+}
+
+/*Mixin para paddings*/
+@mixin paddings($top, $right, $down, $left) {
+    padding: $top $right $down $left;
+}
+
+@mixin cursorType($type) {
+    cursor: $type;
+}
+
+/*Herencia para botones*/
+%styleButtons {
+    background-color: $bgButton;
+    border: 2px solid $generalBorder;
+    border-radius: 20px;
+    color: $whiteText;
+}
+
+%styleButtonsHover {
+    background-color: $bgLight;
+    border: 2px solid $generalBorder;
+    color: $generalText;
+}
+
+%styleButtonsDysabled {
+    background-color: $bgDisabled;
+    text-decoration: line-through;
+    text-decoration-color: $bgLight;
+    color: $generalText;
+}
+
+/*Estilos generales*/
+body {
+    font-family: $generalFont;
+    font-weight: $generalWeight;
+    margin: 0;
+    padding: 0;
+}
+
+/*Estilos para la cabecera del sitio*/
+.header {
+    background-color: $bgHeader;
+    box-sizing: $marginBox;
+    width: 100%; 
+    @include flexContainer(row, space-between, center, 0px);
+    @include paddings(10px, 20px, 10px, 20px);
+
+    &__menu,
+    &__logo,
+    &__shopping {
+        @include icons(35px, 35px, 5px);
+    }
+}
+
+/*Estilos para el banner*/
+.banner {
+    background-image: url("../img/Banner.webp");
+    background-position: 100% 30%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: $marginBox;
+    color: $whiteText;
+    text-align: center;
+    width: 100%;
+    @include flexContainer(column, space-between, center, 10px);
+    @include paddings(30px, 0px, 30px, 0px);
+
+    &__title {
+        @include fontSizeFluid(16px, 2vw, 30px);
+    }
+
+    &__text {
+        @include fontSizeFluid(11px, 1.7vw, 24px);
+    }
+}
+
+
+/*Estilos para el cuerpo de la página*/
+.products {
+    margin: 0 auto;
+    width: 80%;
+    box-sizing: $marginBox;
+    @include gridContainer(auto-fit, 250px, 1fr, 20px, baseline);
+    @include paddings(30px, 20px, 30px, 20px);
+
+    &__item {
+        text-align: center;
+        @include cursorType(pointer);
+    }
+
+    &__image {
+        margin-bottom: 15px;
+        width: 200px;
+    }
+
+    &__description,
+    &__price,
+    &__btn--buy {
+        font-family: $generalFont;
+        font-weight: $generalWeight;
+        margin-bottom: 10px;
+        @include fontSizeFluid(10px, 0.8vw, 16px);
+        
+    }
+
+    &__btn--buy {
+        padding: 5px 0px;
+        width: 80%;
+        transition: all 300ms ease;
+        @include cursorType(pointer);
+        @extend %styleButtons;
+    }
+
+    &__btn--buy:hover {
+        @extend %styleButtonsHover;  
+    }
+
+    /*Estilo para botones cuando no hay stock*/
+    &__btn--disabled {
+        @extend %styleButtonsDysabled;    
+    }
+}
+
+/*Estilos para el carrito de compras*/
+.cart {
+    height: 100%;
+    position: fixed;
+    right: -100%;
+    top: 100px;
+    max-width: 25rem;
+    background-color: $bgLight;
+    box-shadow: $cartShadow;
+    box-sizing: $marginBox;
+    @include paddings(25px, 25px, 25px, 25px);
+
+
+    &__title {
+        width: 100%;
+        box-sizing: $marginBox;
+        text-align: center;
+        @include fontSizeFluid(14px, 1.2vw, 20px);
+        @include paddings(25px, 0px, 25px, 0px);
+    }
+
+    &__item {
+        width: 100%;
+        border-bottom: 1px solid $generalBorder;
+        box-sizing: $marginBox;
+        flex: 1;
+        @include flexContainer(row, space-between, center, 15px);
+        @include paddings(15px, 0px, 15px, 0px);
+    }
+
+    &__item--image {
+        @include icons(auto, 60px, 5px);
+    }
+
+    &__item--description,
+    &__item--price {
+        font-size: clamp(10px, 0.8vw, 16px);
+    }
+
+    &__item--description {
+        width: 10rem;
+    }
+
+    &__item--delete {
+        @include icons(auto, 30px, 4px);
+        @include cursorType(pointer);
+    }
+}
+
+/*Estilos para celulares y tabletas*/
+@media (max-width: 768px) {
+    .banner {
+        background-position: 100% 30%;
+        @include paddings(15px, 15px, 15px, 15px);
+    
+        &__title {
+            margin-bottom: 5px;
+        }
+    }
+}
+
+@media (hover: hover) {
+    .products__btn--buy:hover {
+        background-color: $bgLight;
+        border: 2px solid $generalBorder;
+        color: $generalText;
+    }
+}
+
+/*Estilos para modo oscuro*/
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: $bgHeader;
+        color: $bgLight;
+    }
+
+    .cart {
+        background-color: $bgHeader;
+        box-shadow: $cartShadow;
+
+        &__item {
+            border-bottom: 1px solid $bgDisabled;
+        }
+    }   
+}

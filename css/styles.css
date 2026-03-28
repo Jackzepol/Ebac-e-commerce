@@ -1,0 +1,192 @@
+@charset "UTF-8";
+/*Variables*/
+/*Mixin para el contenedor de la cabecera*/
+/*Mixin para el contenedor del cuerpo*/
+/*mixin para los iconos de la cabecera y el carrito*/
+/*Mixin para el tamaño de las fuentes*/
+/*Mixin para paddings*/
+/*Herencia para botones*/
+.products__btn--buy {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 2px solid #333;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.products__btn--buy:hover {
+  background-color: #efefef;
+  border: 2px solid #333;
+  color: #000000;
+}
+
+.products__btn--disabled {
+  background-color: #9b9b9b;
+  text-decoration: line-through;
+  text-decoration-color: #efefef;
+  color: #000000;
+}
+
+/*Estilos generales*/
+body {
+  font-family: "Lexend", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+/*Estilos para la cabecera del sitio*/
+.header {
+  background-color: #2a2929;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0px;
+  padding: 10px 20px 10px 20px;
+}
+.header__menu, .header__logo, .header__shopping {
+  height: 35px;
+  width: 35px;
+  border-radius: 5px;
+}
+
+/*Estilos para el banner*/
+.banner {
+  background-image: url("../img/Banner.webp");
+  background-position: 100% 30%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 30px 0px 30px 0px;
+}
+.banner__title {
+  font-size: clamp(16px, 2vw, 30px);
+}
+.banner__text {
+  font-size: clamp(11px, 1.7vw, 24px);
+}
+
+/*Estilos para el cuerpo de la página*/
+.products {
+  margin: 0 auto;
+  width: 80%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  align-items: baseline;
+  padding: 30px 20px 30px 20px;
+}
+.products__item {
+  text-align: center;
+  cursor: pointer;
+}
+.products__image {
+  margin-bottom: 15px;
+  width: 200px;
+}
+.products__description, .products__price, .products__btn--buy {
+  font-family: "Lexend", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: clamp(10px, 0.8vw, 16px);
+}
+.products__btn--buy {
+  padding: 5px 0px;
+  width: 80%;
+  transition: all 300ms ease;
+  cursor: pointer;
+}
+.products {
+  /*Estilo para botones cuando no hay stock*/
+}
+/*Estilos para el carrito de compras*/
+.cart {
+  height: 100%;
+  position: fixed;
+  right: -100%;
+  top: 100px;
+  max-width: 25rem;
+  background-color: #efefef;
+  box-shadow: -19px -1px 22px -5px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  padding: 25px 25px 25px 25px;
+}
+.cart__title {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: clamp(14px, 1.2vw, 20px);
+  padding: 25px 0px 25px 0px;
+}
+.cart__item {
+  width: 100%;
+  border-bottom: 1px solid #333;
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 0px 15px 0px;
+}
+.cart__item--image {
+  height: auto;
+  width: 60px;
+  border-radius: 5px;
+}
+.cart__item--description, .cart__item--price {
+  font-size: clamp(10px, 0.8vw, 16px);
+}
+.cart__item--description {
+  width: 10rem;
+}
+.cart__item--delete {
+  height: auto;
+  width: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/*Estilos para celulares y tabletas*/
+@media (max-width: 768px) {
+  .banner {
+    background-position: 100% 30%;
+    padding: 15px 15px 15px 15px;
+  }
+  .banner__title {
+    margin-bottom: 5px;
+  }
+}
+@media (hover: hover) {
+  .products__btn--buy:hover {
+    background-color: #efefef;
+    border: 2px solid #333;
+    color: #000000;
+  }
+}
+/*Estilos para modo oscuro*/
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #2a2929;
+    color: #efefef;
+  }
+  .cart {
+    background-color: #2a2929;
+    box-shadow: -19px -1px 22px -5px rgba(0, 0, 0, 0.3);
+  }
+  .cart__item {
+    border-bottom: 1px solid #9b9b9b;
+  }
+}/*# sourceMappingURL=styles.css.map */
